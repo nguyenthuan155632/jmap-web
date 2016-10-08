@@ -1,0 +1,299 @@
+<body id="building-select">
+<!-- Google Tag Manager -->
+<%= render :partial => "layouts/noscript" %>
+<!-- Google Analytics -->
+<%= javascript_include_tag 'ga.js' %>
+<!-- End Google Analytics -->
+<%= javascript_include_tag 'gtm.js' %>
+<!-- End Google Tag Manager -->
+<%= javascript_include_tag 'indoor_index.js' %>
+
+<ons-page>
+  <ons-toolbar>
+    <div class="left">
+      <!-- <ons-button id="back_button" modifier="quiet">
+        <ons-icon icon="fa-angle-left" size="36px"></ons-icon>
+      </ons-button> -->
+      <span id="toolbar-button" class="toolbar-button--quiet navigation-bar__line-height">
+          <i class="ion-navicon" style="font-size:32px; vertical-align:-6px;"></i>
+      </span>
+    </div>
+
+    <!-- 施設名称　-->
+    <div class="center"></div>
+
+    <div class="right">
+      <ons-button id="recommend_button" modifier="quiet">
+        <ons-icon icon="map-marker" size="36px"></ons-icon>
+      </ons-button>
+    </div>
+  </ons-toolbar>
+
+  <div id="mapField">
+    <!-- Language switching button -->
+    <div id="toolbar-menu" class="close" style="background-color:#eee; z-index: 9999;">
+      <ul class="list i18ntext" style="margin-top:10px;">
+        <li data-i18n="701" class="list__item list__item--chevron" id="btn-terms" onclick="location.href='<%= terms_path %>'"></li>
+      </ul> 
+      <p style="margin:16px 0 10px 10px" class="i18ntext" data-i18n="409"></p>
+      <ul class="list">
+        <li class="list__item item__indoor" onclick="changeDisplayLanguage('zh-CN');">
+          <label class="radio-button radio-button--list-item">
+            <input type="radio" name="menubtn_lang" value="zh-CN">
+            <div class="i18ntext radio-button__checkmark radio-button--list-item__checkmark"></div>
+            <span data-i18n="105" class="i18ntext"></span>
+          </label>
+        </li>
+        <li class="list__item item__indoor" onclick="changeDisplayLanguage('zh-TW');">
+          <label class="radio-button radio-button--list-item">
+            <input type="radio" name="menubtn_lang" value="zh-TW">
+            <div class="i18ntext radio-button__checkmark radio-button--list-item__checkmark"></div>
+            <span data-i18n="106" class="i18ntext"></span>
+          </label>
+        </li>
+        <li class="list__item item__indoor" onclick="changeDisplayLanguage('ja');">
+          <label class="radio-button radio-button--list-item">
+            <input type="radio" name="menubtn_lang" value="ja">
+            <div class="i18ntext radio-button__checkmark radio-button--list-item__checkmark"></div>
+            <span data-i18n="107" class="i18ntext"></span>
+          </label>
+        </li>
+        <li class="list__item item__indoor" onclick="changeDisplayLanguage('en');">
+          <label class="radio-button radio-button--list-item">
+            <input type="radio" name="menubtn_lang" value="en" checked>
+            <div class="i18ntext radio-button__checkmark radio-button--list-item__checkmark"></div>
+            <span data-i18n="108" class="i18ntext"></span>
+          </label>
+        </li>   
+      </ul>
+      <p style="margin:16px 0 10px 10px" class="i18ntext" data-i18n="634"></p>
+      <ul class="list">
+        <li class="list__item item__indoor">
+          <label class="checkbox--noborder" style="width: 100%;">
+            <input type="checkbox" name="preference_routing" id="preference_routing" onchange="changeRoutePreference()">
+            <div class="i18ntext checkbox__checkmark"></div>
+            <span data-i18n="635" class="i18ntext"></span>
+          </label>
+        </li>
+      </ul>
+    </div>
+    <!-- End -->
+
+    <!-- Preference routing -->
+    <!-- <div style="top: 45px; right: 10px; position: absolute; z-index: 9999;" id="select_change">
+    <label>
+      <select id="inputSelection" onchange="changeRoutePreference()" style="font-size: 85%; width: auto;border: 1px solid rgb(205, 205, 205); border-radius: 2px; ">
+        <option value="adjustmentsNormal">No Adjustments</option>
+        <option value="adjustmentsElevatorOnly">Elevator Only</option>
+        <option value="adjustmentsEscalatorOnly">Escalator Only</option>
+        <option value="adjustmentsStairsOnly">Stairs Only</option>
+        <option value="adjustmentsPreferNonElevator">Prefer Non Elevator</option>
+        <option value="adjustmentsPreferElevator">Prefer Elevator</option>
+        <option value="adjustmentsPreferNonEscalator">Prefer Non Escalator</option>
+        <option value="adjustmentsPreferEscalator">Prefer Escalator</option>
+        <option value="adjustmentsPreferNonStairs">Prefer Non Stairs</option>
+        <option value="adjustmentsPreferStairs">Prefer Stairs</option>
+      </select>
+      </label>
+    </div> -->
+
+    <!-- End -->
+
+    <!-- TODO フォントや色の変更 -->
+    <div style="position: absolute; z-index: 100; width: 100px; height: 10px; color: rgb(102,153,204);
+            display: block; margin: 0px; padding: 0px;
+            font-size: 60%; top: 18px; right: 0px;">Last updated <label id="last_updated"></label></div>
+  </div>
+</ons-page>
+
+<div id="building-list">
+  <div id="tab-button">
+    <ons-button modifier="quiet">
+      <ons-icon icon="ion-chevron-up" size="36px" id="listicon"></ons-icon>
+    </ons-button>
+  </div>
+
+  <!-- 検索ボックス -->
+  <div id="search-box">
+    <input type="text" id="search" class="text-input--transparent i18ntext" data-i18n="[placeholder]601" value="">
+    <ons-button class="search-button" onclick="" modifier="quiet">
+      <ons-icon icon="ion-android-search" size="36px"></ons-icon>
+    </ons-button>
+  </div>
+
+  <ons-scroller id="searchFreeWord">
+    <ul class="list" id="searchlist">
+    </ul>
+  </ons-scroller>
+</div>
+
+<!-- recomend dialog -->
+<ons-template id="recomend-dialog.html">
+  <ons-dialog var="recomendDialog" cancelable>
+    <ons-toolbar inline>
+      <div class="center i18ntext" data-i18n="502">
+      </div>
+      <div class="right">
+        <ons-button onclick="recomendDialog.hide()" modifier="quiet">
+          <ons-icon icon="ion-close-round" size="24px"></ons-icon>
+        </ons-button>
+      </div>
+    </ons-toolbar>
+
+    <ul class="list list--noborder">
+      <li class="list__item" style="clear:both;">
+        <div class="recomend-icon">
+          <object data="img/icon-taxfree.svg" type="image/svg+xml" width="23" height="26"></object>
+        </div>
+        <span class="list__item__line-height i18ntext" data-i18n="406"></span>
+        <label class="switch switch--list-item">
+          <input type="checkbox" class="switch__input" id="recommend_duty_free">
+
+          <div class="switch__toggle"></div>
+        </label>
+      </li>
+      <li class="list__item" style="clear:both;">
+        <div class="recomend-icon">
+          <object data="img/icon-concierge.svg" type="image/svg+xml" width="23" height="26"></object>
+        </div>
+        <span class="list__item__line-height i18ntext" data-i18n="407"></span>
+        <label class="switch switch--list-item">
+
+          <input type="checkbox" class="switch__input" id="recommend_concierge">
+
+          <div class="switch__toggle"></div>
+        </label>
+      </li>
+    </ul>
+
+  </ons-dialog>
+</ons-template>
+<!-- /recomend dialog -->
+
+<!-- onsite search dialog -->
+<ons-template id="onsite-search-dialog.html">
+  <ons-dialog var="onsiteSearchDialog" cancelable>
+    <ons-toolbar inline>
+      <div class="center" id="buildname-search"></div>
+      <div class="right">
+        <ons-button onclick="onsiteSearchDialog.hide()" modifier="quiet">
+          <ons-icon icon="ion-close-round" size="24px"></ons-icon>
+        </ons-button>
+      </div>
+    </ons-toolbar>
+    <ons-scroller style="height:inherit;">
+      <!-- Thuan added 20160705 -->
+      <div id="category-menu">
+
+      </div>
+      <!-- End -->
+    </ons-scroller>
+  </ons-dialog>
+</ons-template>
+<!-- /onsite search dialog -->
+
+<!-- multi toilet dialog -->
+<ons-template id="multi-toilet-dialog.html">
+  <ons-dialog var="multiToiletDialog" cancelable>
+    <ons-toolbar inline>
+      <div class="center" id="buildname-multi"></div>
+      <div class="right">
+        <ons-button onclick="multiToiletDialog.hide()" modifier="quiet">
+          <ons-icon icon="ion-close-round" size="24px"></ons-icon>
+        </ons-button>
+      </div>
+    </ons-toolbar>
+    <ons-scroller style="height:inherit;">
+      <ul class="list" id="shoplist">
+      </ul>
+    </ons-scroller>
+  </ons-dialog>
+</ons-template>
+<!-- /onsite search dialog -->
+
+<!-- single button dialog --><!--
+    <ons-template id="single-button-dialog.html">
+        <ons-dialog var="singleButtonDialogVar">
+        	<div id="singleButtonDialog">
+                <p class="i18ntext" data-i18n="611"></p>
+                <div class="ok-button-box">
+                    <ons-button class="i18ntext" data-i18n="612" onclick="singleButtonDialogVar.hide()"></ons-button>
+                </div>
+            </div>
+        </ons-dialog>
+    </ons-template>
+    --><!-- /single button dialog -->
+
+<!-- shop select dialog -->
+<ons-template id="shop-select-dialog.html">
+  <ons-popover var="shopSelectDialogVar" direction="up down" cancelable style="width:90%;">
+    <div id="shopSelectDialog">
+      <div class="shop-name-box">
+        <!-- ショップ名 -->
+        <p class="left name" id="left_shop_name"></p></br>
+        <p class="left name" id="left_poi_name"></p>
+        <div class="right">
+          <ons-button class="button button--light i18ntext" id="site_link" style="display: none" data-i18n="633"></ons-button>
+          <!--<a href="" id="site_link" style="display: none">Web Site</a>-->
+        </div>
+      </div>
+      <div class="shop-name-box">
+        <div class="left">
+          <ons-button id="from_button" class="i18ntext" data-i18n="622"></ons-button>
+        </div>
+        <div class="right">
+          <ons-button id="to_button" class="i18ntext" data-i18n="623"></ons-button>
+        </div>
+      </div>
+    </div>
+  </ons-popover>
+</ons-template>
+<!-- /shop select dialog -->
+
+<!-- shop detail dialog -->
+<ons-template id="shop-detail-dialog.html">
+  <ons-dialog var="shopDetailDialogVar" cancelable style="width:90%">
+    <ons-toolbar inline>
+      <!-- ショップ名 -->
+      <div class="center" id="detail_shop_name">
+      </div>
+
+      <div class="right">
+        <ons-button onclick="shopDetailDialogVar.hide()" modifier="quiet">
+          <ons-icon icon="ion-close-round" size="24px"></ons-icon>
+        </ons-button>
+      </div>
+    </ons-toolbar>
+
+    <div class="shop-detail-box">
+      <!-- ショップ紹介文言 -->
+      <p class="detail-text" id="hours_text"></p>
+
+      <p class="detail-text" id="address_text"></p>
+
+      <div class="button-box">
+        <!-- ショップ電話番号 -->
+        <ons-button id="tel_button"><a id="tel_link" href="tel:"></a></ons-button>
+
+        <!-- ショップWebsite URL -->
+        <ons-button id="url_button">Web Site</ons-button>
+      </div>
+
+    </div>
+  </ons-dialog>
+</ons-template>
+<!-- /shop detail dialog -->
+
+</body>
+<!-- Add css Thuan 10052016 -->
+<style type="text/css">
+    .active-floor-color {
+        background-color: rgb(255, 127, 39) !important;
+        color: white !important;
+    }
+    .active-current-floor {
+        background-color: rgb(0, 107, 183) !important;
+        color: white !important;
+    }
+</style>
+<!-- End add css Thuan 10052016 -->

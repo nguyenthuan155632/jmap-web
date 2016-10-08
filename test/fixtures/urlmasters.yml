@@ -1,0 +1,35 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  mapId: MyString
+  venueName: MyString
+  floor: MyString
+  typeMap: MyString
+  venueFloorMapImageUrl: MyString
+  venueFloorMapUrl: MyString
+  statusCode: MyString
+  statusCodeWeb: MyString
+  lastModified: 2016-09-15 03:02:46
+  oldImage: MyString
+  newImage: MyString
+  diffImage: MyString
+  size: MyString
+  archive: MyString
+  archiveTime: 2016-09-15 03:02:46
+
+two:
+  mapId: MyString
+  venueName: MyString
+  floor: MyString
+  typeMap: MyString
+  venueFloorMapImageUrl: MyString
+  venueFloorMapUrl: MyString
+  statusCode: MyString
+  statusCodeWeb: MyString
+  lastModified: 2016-09-15 03:02:46
+  oldImage: MyString
+  newImage: MyString
+  diffImage: MyString
+  size: MyString
+  archive: MyString
+  archiveTime: 2016-09-15 03:02:46

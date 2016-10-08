@@ -1,0 +1,145 @@
+<body id="app-exp">
+<!-- Google Tag Manager -->
+<%= render :partial => "layouts/noscript" %>
+<%= javascript_include_tag 'gtm.js' %>
+<!-- End Google Tag Manager -->
+
+	<%= javascript_include_tag 'exp_index.js' %>
+		
+    <ons-navigator title="Navigator" var="appExpNavigator">
+        <ons-page>
+          <div class="exp-img">
+            <img class="i18ntext" data-i18n="[src]201" width="94%" />
+          </div>
+            <p class="exp-text">
+	        	<span class="i18ntext" data-i18n="202"></span><br />
+	        	<span class="i18ntext" data-i18n="203"></span>
+            </p>
+            <div id="nav">
+                    <div class="left"><ons-button class="button button--light i18ntext" data-i18n="206" onclick="history.go(-1);"></ons-button></div>
+                    <div class="right">
+                    	<ons-button class="button i18ntext" data-i18n="205" onclick="appExpNavigator.pushPage('tmpl_step_01.html', {
+                    		onTransitionEnd: function() {
+                    			translate_i18n();
+                    		}
+                    	})">
+                    	</ons-button>
+                	</div>
+            </div>
+        </ons-page>
+    </ons-navigator>
+
+    <ons-template id="tmpl_step_01.html">
+    	<ons-page>
+
+			<div class="exp-img">
+				<img class="i18ntext" data-i18n="[src]211" width="94%" />
+			</div>
+			<p class="exp-title i18ntext" data-i18n="212"></p>
+			<p class="exp-text i18ntext" data-i18n="213"></p>
+			<div id="nav">
+				<div class="left">
+					<ons-button class="button button--light i18ntext" data-i18n="204" onclick="appExpNavigator.popPage()">
+					</ons-button>
+				</div>
+				<div class="right">
+					<ons-button class="i18ntext" data-i18n="205" onclick="appExpNavigator.pushPage('tmpl_step_02.html', {
+						onTransitionEnd: function() {
+							translate_i18n();
+						}
+					})">
+					</ons-button>
+				</div>
+			</div>
+
+    	</ons-page>
+    </ons-template>
+    
+    <ons-template id="tmpl_step_02.html">
+    	<ons-page>
+
+			<div class="exp-img">
+				<img class="i18ntext" data-i18n="[src]221" width="94%" />
+			</div>
+			<p class="exp-title i18ntext" data-i18n="222"></p>
+			<p class="exp-text i18ntext" data-i18n="223"></p>
+			
+			<div id="nav">
+				<div class="left"><ons-button class="button button--light i18ntext"  data-i18n="204" onclick="appExpNavigator.popPage()"></ons-button></div>
+				<div class="right">
+					<ons-button class="i18ntext" data-i18n="205" onclick="appExpNavigator.pushPage('tmpl_step_03.html', {
+						onTransitionEnd: function() {
+							translate_i18n();
+			    		}
+					})">
+					</ons-button>
+				</div>
+			</div>
+
+    	</ons-page>
+    </ons-template>
+    	
+    <ons-template id="tmpl_step_03.html">
+    	<ons-page>
+			<div class="exp-img">
+				<img class="i18ntext" data-i18n="[src]231" width="94%" />
+			</div>
+			<p class="exp-title i18ntext" data-i18n="232"></p>
+			<p class="exp-text i18ntext" data-i18n="233"></p>
+			
+			<div id="nav">
+				<div class="left"><ons-button class="button button--light i18ntext" data-i18n="204" onclick="appExpNavigator.popPage()"></ons-button></div>
+				<div class="right">
+					<ons-button class="i18ntext" data-i18n="205" onclick="appExpNavigator.pushPage('tmpl_step_04.html', {
+						onTransitionEnd: function() {
+							translate_i18n();
+						}
+					})">
+					</ons-button>
+				</div>
+			</div>
+    	</ons-page>
+    </ons-template>
+
+    <ons-template id="tmpl_step_04.html">
+    	<ons-page>
+			<div class="exp-img">
+				<img class="i18ntext" data-i18n="[src]241" width="94%" />
+			</div>
+			<p class="exp-title i18ntext" data-i18n="242"></p>
+			<p class="exp-text i18ntext" data-i18n="243"></p>
+			
+			<div id="nav">
+				<div class="left"><ons-button class="button button--light i18ntext" data-i18n="204" onclick="appExpNavigator.popPage()"></ons-button></div>
+				<div class="right">
+					<ons-button class="i18ntext" data-i18n="205" onclick="appExpNavigator.pushPage('tmpl_start.html', {
+						onTransitionEnd: function() {
+							translate_i18n();
+						}
+					})">
+					</ons-button>
+				</div>
+			</div>
+    	</ons-page>
+    </ons-template>
+
+    <ons-template id="tmpl_start.html">
+    	<ons-page>
+			<div class="logo-box">
+				<img src="img/app-logo.png" width="64%" alt="Japan Indoor Map" />
+				<p>
+					<span class="i18ntext" data-i18n="101"></span><br />
+					<span class="i18ntext" data-i18n="102"></span>                	
+				</p>
+			</div>
+			
+			<div class="start-button"><ons-button class="i18ntext" data-i18n="251" onclick="location.href='area'"></ons-button></div>
+			
+			<div id="nav">
+				<div class="left"><ons-button class="button button--light i18ntext" data-i18n="204" onclick="appExpNavigator.popPage()"></ons-button></div>
+			</div>
+    	</ons-page>
+    </ons-template>
+    
+</body>
+

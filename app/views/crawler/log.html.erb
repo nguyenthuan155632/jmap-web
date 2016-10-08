@@ -1,0 +1,32 @@
+<div class="container container-page" style="margin-top: 50px"> 
+	<h1 class="text-center">Log</h1>
+	<div class="table-responsive" style="margin-top: 20px">
+		<table class="table" id="mapList">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Log</th>
+					<th>Date</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% i = 0 %>
+				<% @logs.each do |u| %>
+				<% if u.message == "Refresh successfully!" %>
+				<% next %>
+				<% end %>
+				<tr>
+					<% i = i + 1 %>
+					<td><%= i %></td>
+					<td style="color: #a94442;"><%= u.message %></td>
+					<td><%= u.created_at.in_time_zone("Asia/Tokyo").strftime("%Y-%m-%d %H:%M:%S") %></td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+
+	<!-- <a href="" class="btn btn-success">エラーチェック実行</a>
+	<a href="" class="btn btn-info">屋内マップ差分抽出</a> -->
+</div>
+

@@ -1,0 +1,26 @@
+# Ignore bundler config.
+.bundle
+vendor/bundle/*
+
+# Ignre precompiled assets.
+public/assets/*
+
+# Ignore capistrano files.
+Capfile
+config/deploy.rb
+config/deploy/*
+
+# Ignore all dotfiles.
+.[a-z]*
+
+# Ignore all logfiles and tempfiles.
+log/*
+!log/.keep
+tmp/*
+
+**/*~
+**/*.bak
+**/*.tmp
+**/*#
+**/$*
+**/~$*

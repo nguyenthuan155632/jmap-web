@@ -1,0 +1,90 @@
+<div class="content">
+  <div class="row">
+    <div class="text-center">
+      <h2>Import Result</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="box">
+        <div class="box-header">
+          <!-- <h3 class="box-title">Database Registration</h3> -->
+
+        <!-- /.box-header -->
+        <div class="box-body table-responsive no-padding">
+          <table class="table table-hover" id="import-list">
+            <tr>
+              <th>時間</th>
+              <th>処理種類</th>
+              <th>ステータス</th>
+              <th>言語</th>
+              <th>ファイル名</th>
+              <th>差分DL</th>
+              <th>置換DL</th>
+            </tr>
+          <% @tasks.reverse_each do |t| %>
+            <tr>
+              <td><%= t.updated_at.in_time_zone("Hanoi").strftime("%Y-%m-%d %H:%M") %></td>
+              <td><%= t.task %></td>
+              <% if t.status == "wait"
+                color_label = "danger"
+              elsif t.status == "doing"
+                color_label = "warning"
+              elsif t.status == "done"
+                color_label = "success"
+              end %>
+              <td><span class="label label-<%= color_label %>"><%= t.status %></span></td>
+              <td><%= t.language %></td>
+              <td><a href="<%= t.original %>" download="<%= t.filename %>"><%= t.filename %></a></td>
+              <td>
+                <% if t.task == "翻訳" %>
+                  <% if valid_json?(t.extract) %>
+                  <% ext = JSON.parse t.extract %>
+                  <% ext.each do |e| %>
+                    <% if e[e.keys.first.to_s] != "---" %>
+                      <a href="<%= e[e.keys.first.to_s] %>" download="<%= e.keys.first.to_s %>_差分_<%= t.filename %>"><%= e.keys.first.to_s %>:DL </a>
+                    <% else %>
+                      --- 
+                    <% end %>
+                  <% end %>
+                  <% else %>
+                    ---
+                  <% end %>
+                <% else %>
+                  <% ext = JSON.parse t.extract %>
+                  <% if ext[0] != "---" %>
+                    <a href="<%= ext[0] %>" download="差分_<%= t.filename %>">download</a>
+                  <% else %>
+                    ---
+                  <% end %>
+                <% end %>
+              </td>
+              <td>
+                <% if t.task == "翻訳" %>
+                  <% if valid_json?(t.registration) %>
+                  <% regis = JSON.parse t.registration %>
+                  <% regis.each do |r| %>
+                    <a href="<%= r[r.keys.first.to_s] %>" download="<%= r.keys.first.to_s %>_置換_<%= t.filename %>"><%= r.keys.first.to_s %>:DL </a>
+                  <% end %>
+                  <% else %>
+                    ---
+                  <% end %>
+                <% else %>
+                  <% if valid_json?(t.registration) %>
+                  <% regis = JSON.parse t.registration %>
+                  <a href="<%= regis[0] %>" download="置換_<%= t.filename %>">download</a>
+                  <% else %>
+                    ---
+                  <% end %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+          </table>
+        </div>
+        <!-- /.box-body -->
+      </div>
+    </div>
+  </div>
+  
+</div>

@@ -1,0 +1,89 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta http-equiv="Pragma" content="no-cache">
+	<meta http-equiv="Cache-Control" content="no-cache">
+    
+	<script src="javascripts/angular.js"></script>
+    <script src="javascripts/onsenui.js"></script>
+    <script src="javascripts/jquery-1.11.3.min.js"></script>
+    <script src="javascripts/common.js"></script>
+    <script src="javascripts/i18next-1.10.1.js"></script>
+    <script src="javascripts/jmap.js"></script>
+    <script src="javascripts/jmap-i18n.js"></script>
+    
+    <link rel="stylesheet" href="stylesheets/onsenui.css">
+    <link rel="stylesheet" href="stylesheets/onsen-css-components.css">
+    <link rel="stylesheet" href="stylesheets/style.css">
+    
+</head>
+
+<body id="app-exp">
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-58F27H"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-58F27H');</script>
+<!-- End Google Tag Manager -->
+	<script>
+		var jmap_i18n = new JMapI18N();
+		var i18n_id = [
+			"201", "202", "203", "204", "205", "206",
+			"211", "212", "213",
+			"221", "222", "223",
+			"231", "232", "233",
+			"241", "242", "243",
+			"251",
+			"101", "102"
+			];
+		var lang = browserLanguage();
+		var i18n_area, i18n_taxfree, i18n_concierge;
+		var resources = {};
+		result = lang.indexOf("-");
+		if(result != -1) {
+			lang = lang.substring(0,result) + lang.substring(result).toUpperCase(); 
+		}
+		resources[lang]={ translation:{} }
+		jmap_i18n.getResources(lang, i18n_id).done(function(data) {
+			for (var i = 0; i < data.response.info.texts.length; i++) {
+				resources[lang].translation[data.response.info.texts[i].id] = 
+					data.response.info.texts[i].attrs.name[0];
+			}
+			i18n.init({lng: lang, resStore: resources, fallbackLng: lang}).done(function() {
+				$(".i18ntext").i18n();
+			});
+		});
+		
+		function translate_i18n() {
+			$(".i18ntext").i18n();
+		}
+	</script>
+    <ons-navigator title="Navigator" var="appExpNavigator">
+        <ons-page>
+          <div class="exp-img">
+            <img class="i18ntext" data-i18n="[src]201" width="94%" />
+          </div>
+            <p class="exp-text">
+	        	<span class="i18ntext" data-i18n="202"></span><br />
+	        	<span class="i18ntext" data-i18n="203"></span>
+            </p>
+            <div id="nav">
+                    <div class="left"><ons-button class="button button--light i18ntext" data-i18n="206" onclick="history.go(-1);"></ons-button></div>
+                    <div class="right">
+                    	<ons-button class="button i18ntext" data-i18n="205" onclick="appExpNavigator.pushPage('step_01.html', {
+                    		onTransitionEnd: function() {
+                    			translate_i18n();
+                    		}
+                    	})">
+                    	</ons-button>
+                	</div>
+            </div>
+        </ons-page>
+    </ons-navigator>
+</body>
+</html>

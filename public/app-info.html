@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+	<script src="javascripts/angular/angular.js"></script>
+    <script src="javascripts/onsenui.js"></script>
+    <script src="javascripts/jquery-1.11.3.min.js"></script>
+    <script src="javascripts/common.js"></script>
+    <script src="javascripts/i18next-1.10.1.js"></script>
+    <script src="javascripts/jmap.js"></script>
+    <script src="javascripts/jmap-i18n.js"></script>
+    
+    <link rel="stylesheet" href="stylesheets/onsenui.css">
+    <link rel="stylesheet" href="stylesheets/onsen-css-components.css">
+    <link rel="stylesheet" href="stylesheets/style.css">
+    
+</head>
+
+<body id="app-info">
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-58F27H"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-58F27H');</script>
+<!-- End Google Tag Manager -->
+    <script>
+		var jmap_i18n = new JMapI18N();
+		var i18n_id = ["301", "302", "303", "304", "305", "306", "307"];
+		var lang = browserLanguage();
+		var i18n_area, i18n_taxfree, i18n_concierge;
+		var resources = {};
+		result = lang.indexOf("-");
+		if(result != -1) {
+			lang = lang.substring(0,result) + lang.substring(result).toUpperCase(); 
+		}
+		resources[lang]={ translation:{} }
+		jmap_i18n.getResources(lang, i18n_id).done(function(data) {
+			for (var i = 0; i < data.response.info.texts.length; i++) {
+				resources[lang].translation[data.response.info.texts[i].id] = 
+					data.response.info.texts[i].attrs.name[0];
+			}
+			i18n.init({lng: lang, resStore: resources, fallbackLng: lang}).done(function() {
+				$(".i18ntext").i18n();
+			});
+		});
+    </script>
+
+    <ons-page>
+        <ons-toolbar>
+            <div class="left"><ons-button onclick="location.href='area'" modifier="quiet"><ons-icon icon="fa-angle-left" size="36px"></ons-icon></ons-button></div>
+            <div class="center i18ntext" data-i18n="301"></div>
+        </ons-toolbar>
+      	
+        <div class="logo-box">
+        	<img src="img/app-logo.png" width="64%" alt="Japan Indoor Map" />
+        	<!-- img src="img/app-logo-cha.svg" width="80%" alt="JMAP-CHA" / -->
+        </div>
+        
+        <div class="info-box i18ntext">
+        	<dl>
+            	<dt data-i18n="302"></dt>
+                <dd data-i18n="303"></dd>
+                <dt data-i18n="304"></dt>
+                <dd data-i18n="305"></dd>
+                <dt data-i18n="306"></dt>
+                <dd><a href="#" data-i18n="307"></a></dd>
+            </dl>
+        </div>
+    </ons-page>
+</body>
+</html>

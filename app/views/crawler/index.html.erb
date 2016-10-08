@@ -1,0 +1,65 @@
+<div class="container container-page" style="margin-top: 50px"> 
+	<h1 class="text-center">Floor Map Crawler</h1>
+	<%= link_to "エラーチェック実行", error_path, :class=>"btn btn-danger" %>
+	<%= link_to "屋内マップ差分抽出", difference_path, :class=>"btn btn-primary" %>
+	<span>Last updated: <%= @refresh_time %></span>
+
+	<div style="margin-top: 20px;">
+		<form action="<%= update_db_path %>" method="post" accept-charset="utf-8" enctype="multipart/form-data" style="float: left;">
+			<input type="file" name="update_db" required>
+			<input type="submit" name="" class="btn btn-default" value="Import to Database" style="margin-top: 10px">
+			<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+		</form>
+		<%= link_to "Add Url Master", add_path, :class=>"btn btn-success add-url" %>
+		<%= link_to "Export CSV", export_path, :class=>"btn btn-default add-url" %>
+	</div>
+	<div style="clear: both"></div>
+	<div class="table-responsive" style="margin-top: 20px">
+		<table class="table" id="mapList">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>mapId</th>
+					<th>venueName</th>
+					<th>floor</th>
+					<th>typeMap</th>
+					<th>venueFloorMapImageUrl</th>
+					<th>venueFloorMapUrl</th>
+					<th>Edit</th>
+					<th>Delete</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% i = 0 %>
+				<% @Urlmasters.each do |u| %>
+				<tr>
+					<% i = i + 1 %>
+					<td><%= i %></td>
+					<td><%= u.mapId %></td>
+					<td><%= u.venueName %></td>
+					<td><%= u.floor %></td>
+					<td><%= u.typeMap %></td>
+					<% if u.venueFloorMapImageUrl && u.venueFloorMapImageUrl != "NA" && u.venueFloorMapImageUrl != "" %>
+					<td><a href="<%= u.venueFloorMapImageUrl %>" target="_blank">Image Url</a></td>
+					<% else %>
+					<td></td>
+					<% end %>
+					<% if u.venueFloorMapUrl && u.venueFloorMapUrl != "NA" && u.venueFloorMapUrl != "" %>
+					<td><a href="<%= u.venueFloorMapUrl %>" target="_blank">Web Url</a></td>
+					<% else %>
+					<td></td>
+					<% end %>
+					<td><a href="edit/<%= u.id %>" class="btn btn-primary">Edit</a></td>
+					<% link_del = "/delete/" + u.id.to_s %>
+					<td><%= link_to "Delete", link_del, :method => :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %></td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+
+	<!-- <a href="" class="btn btn-success">エラーチェック実行</a>
+	<a href="" class="btn btn-info">屋内マップ差分抽出</a> -->
+</div>
+
+ 

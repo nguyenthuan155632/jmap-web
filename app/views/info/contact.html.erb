@@ -1,0 +1,36 @@
+<body id="app-info">
+<!-- Google Tag Manager -->
+<%= render :partial => "layouts/noscript" %>
+<%= javascript_include_tag 'gtm.js' %>
+<!-- End Google Tag Manager -->
+
+<%= javascript_include_tag 'info_contact.js' %>
+
+	<div>
+      <ons-page>
+        <ons-toolbar>
+          <div class="center i18ntext" data-i18n="309"></div>
+        </ons-toolbar>
+        <div style="text-align: center" id="contact-form">
+          <section style="padding: 8px">
+            <input id="e-mail" type="email" class="text-input i18ntext" ng-model="text" data-i18n="[placeholder]310" style="display: block; width: 100%">
+          </section>
+
+          <section style="padding: 0 8px 8px">
+            <textarea id="contact" class="textarea i18ntext" ng-model="text2" data-i18n="[placeholder]311" style="width: 100%; height: 100px;"></textarea>
+          </section>
+
+          <section style="padding: 0 8px 8px">
+            <ons-button id="send-contact" class="center i18ntext" data-i18n="312" modifier="large"></ons-button>
+          </section>
+        </div>
+
+        <div style="text-align: center; margin-top: 32px; display: none" id="contact-result" class="center i18ntext" data-i18n="313">
+          <section style="padding: 8px;">
+            <input type="text" class="text-input i18ntext" ng-model="text" data-i18n="[placeholder]310" style="display: block; width: 100%">
+          </section>
+        </div>
+      </ons-page>
+	</div>
+</body>
+

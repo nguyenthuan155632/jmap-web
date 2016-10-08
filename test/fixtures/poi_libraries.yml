@@ -1,0 +1,33 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  area_id: MyString
+  area_name: MyText
+  floor_name: MyString
+  shop_id: MyString
+  shop_name: MyText
+  categoryid_1: MyString
+  categoryid_2: MyString
+  categoryid_3: MyString
+  categoryid_4: MyString
+  categoryvalue_1: MyString
+  categoryvalue_2: MyString
+  categoryvalue_3: MyString
+  categoryvalue_4: MyString
+  master_category: MyText
+
+two:
+  area_id: MyString
+  area_name: MyText
+  floor_name: MyString
+  shop_id: MyString
+  shop_name: MyText
+  categoryid_1: MyString
+  categoryid_2: MyString
+  categoryid_3: MyString
+  categoryid_4: MyString
+  categoryvalue_1: MyString
+  categoryvalue_2: MyString
+  categoryvalue_3: MyString
+  categoryvalue_4: MyString
+  master_category: MyText

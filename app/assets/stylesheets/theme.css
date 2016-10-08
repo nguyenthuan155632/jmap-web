@@ -1,0 +1,53 @@
+.theme-dropdown .dropdown-menu {
+    position: static;
+    display: block;
+    margin-bottom: 20px;
+}
+
+.theme-showcase>p>.btn {
+    margin: 5px 0;
+}
+
+.theme-showcase .navbar .container {
+    width: auto;
+}
+
+.add-url {
+    width: 200px;
+    float: right;
+    margin-top: 20px;
+    margin-left: 10px;
+}
+
+input[type=file] {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 3px;
+    width: 400px;
+}
+
+#waiting {
+    background: black;
+    z-index: 999;
+    height: 100%;
+    position: absolute;
+    width: 100%;
+    opacity: 0.8;
+    display: none;
+}
+
+#waiting img {
+    position: absolute;
+    top: 45%;
+    left: 45%;
+    width: 80px;
+}
+
+.error-validate {
+    box-shadow: 0 0 0.5em 0.1em red;
+    border: 1px solid red;
+}
+
+.container-page {
+    margin-bottom: 80px;
+}

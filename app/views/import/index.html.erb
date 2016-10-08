@@ -1,0 +1,139 @@
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Import
+        <small>Import page</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="<%= root_path %>"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Import</li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <div class="col-md-8 col-md-offset-2">
+    	<section class="content">
+    		<div class="row" style="margin-bottom: 10px;">
+    			<div class="col-md-12 text-right">
+    				<%= link_to "結果一覧", import_list_path, :class => "btn btn-primary" %>
+    			</div>
+    		</div>
+    		<div class="row" style="margin-bottom: 10px;">
+    			<div class="col-xs-9 col-md-8">
+    				<%= file_field_tag "file_input", :class => "form-control", :placeholder => "File Input" %>
+    			</div>
+    			<div class="col-xs-3 col-md-4" style="padding-left: 0px;">
+    				<!-- <input type="button" class="btn btn-primary" value="選択"> -->
+    			</div>
+    		</div>
+    		<div class="row text-center" style="margin-bottom: 5px;">
+    			<div class="col-md-6 col-sm-6 col-xs-12" style="">
+    				<div class="row">
+    					<div class="col-md-6"></div>
+    					<div class="col-md-6">Short Text Length</div>
+    				</div>
+    			</div>
+    			<div class="col-md-6 col-sm-6 col-xs-12"></div>
+    		</div>
+			<div class="row">
+				<div class="col-md-6 col-sm-6 col-xs-12">
+					<div class="row">
+						<div class="col-md-6">
+						<div class="form-group">
+						<label>
+						  <%= check_box_tag "trans_lang", "en", false, :class => "minimal" %>
+						  英語(en)
+						</label>
+					</div>
+					</div>
+					<div class="col-md-6">
+						<%= number_field_tag "text_length_en", 10, :class => "form-control", :placeholder => "テキストの長さ" %>
+					</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+					<div class="form-group">
+						<label>
+						  <%= check_box_tag "trans_lang", "zh-cn", false, :class => "minimal" %>
+						  簡体字(zh-cn)
+						</label>
+					</div>
+					</div>
+					<div class="col-md-6">
+						<%= number_field_tag "text_length_zh_cn", 10, :class => "form-control", :placeholder => "テキストの長さ" %>
+					</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+					<div class="form-group">
+						<label>
+						  <%= check_box_tag "trans_lang", "zh-tw", false, :class => "minimal" %>
+						  繁体字(zh-tw)
+						</label>
+					</div>
+					</div>
+					<div class="col-md-6">
+						<%= number_field_tag "text_length_zh_tw", 10, :class => "form-control", :placeholder => "テキストの長さ" %>
+					</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+					<div class="form-group">
+						<label>
+						  <%= check_box_tag "trans_lang", "zh-ko", false, :class => "minimal" %>
+						  韓国語(zh-ko)
+						</label>
+					</div>
+					</div>
+					<div class="col-md-6">
+						<%= number_field_tag "text_length_zh_ko", 10, :class => "form-control", :placeholder => "テキストの長さ" %>
+					</div>
+					</div>
+				</div>
+				<!-- /.col -->
+				<div class="col-md-6 col-sm-6 col-xs-12">
+					<div class="form-group">
+						<label>
+						  <%= radio_button_tag "task", "translation", true, :class => "minimal" %>
+						  翻訳
+						</label>
+					</div>
+					<div class="form-group">
+						<label>
+						  <%= radio_button_tag "task", "classification", false, :class => "minimal" %>
+						  カテゴリ分類
+						</label>
+					</div>
+				</div>
+				<!-- /.col -->
+			</div>
+			<!-- /.row -->
+			<div class="row">
+				<div class="text-center">
+					<%= button_tag "差分抽出", type: 'button', :class => "btn btn-primary", :id => "extract-button", :style => "margin-right: 20px; width: 100px" %>		
+					<%= button_tag "データ登録", :class => "btn btn-primary", :id => "registration-button", :style => "width: 100px" %>
+				</div>	
+			</div>
+		</section>
+    </div>
+    <!-- /.content -->
+    <!-- Modal -->
+	<div id="myModal" class="modal fade" role="dialog">
+	  <div class="modal-dialog">
+
+	    <!-- Modal content-->
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	        <h4 class="modal-title">Error!</h4>
+	      </div>
+	      <div class="modal-body">
+	        <p>Something is wrong!!!</p>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	      </div>
+	    </div>
+
+	  </div>
+	</div>

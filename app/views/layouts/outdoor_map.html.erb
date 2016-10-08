@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <link rel="shortcut icon" href="<%= asset_path('favicon.ico') %>" />
+  <link rel="apple-touch-icon" href="<%= asset_path('apple-touch-icon.png') %>">
+  <title>Japan Indoor Map</title>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= stylesheet_link_tag    'onsenui', media: 'all' %>
+  <%= stylesheet_link_tag    'onsen-css-components', media: 'all' %>
+  <script>
+    window.JmapConfig = {
+    	api: { location: '<%= ENV['JMAPAPI_LOCATION'] %>' },
+    	micello: { key: '<%= ENV['MICELLO_API_KEY'] %>' },
+    	browser: { language: '<%= ENV['BROWSER_LANGUAGE'] %>' }
+    };
+  </script>
+  <%= javascript_include_tag 'application' %>
+  <%= javascript_include_tag 'jquery-ui.js' %>
+  <%= javascript_include_tag 'http://www.openlayers.org/api/OpenLayers.js' %>
+  <%= javascript_include_tag 'outdoor-map.js' %>
+  <%= javascript_include_tag 'jquery.cookie.js' %>
+  <%= csrf_meta_tags %>
+</head>
+
+<%= yield %>
+
+</html>

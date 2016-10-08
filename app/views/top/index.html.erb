@@ -1,0 +1,25 @@
+<div id="top">
+    <%= javascript_include_tag 'top_index.js' %>
+    <ons-navigator title="Navigator" var="myNavigator">
+        <ons-page>
+        	<div class="bg">
+                <div class="logo-box">
+                    <%= image_tag('app-logo.png', :width => "64%", :alt => "Japan Indoor Map") %>
+                    <!-- %= image_tag('app-logo-cha.svg', :width => "80%", :alt => "JMAP-CHA") % -->
+                </div>
+                <div class="lang-box" id="btn_lang">
+                </div>
+                <p>
+                	<span class="i18ntext" data-i18n="101"></span><br />
+                	<span class="i18ntext" data-i18n="102"></span>                	
+                </p>
+                
+                <dl class="start-button i18ntext">
+                    <dd><ons-button data-i18n="103" onclick="location.href='<%= exp_index_path %>'"></ons-button></dd>
+                    <dd><ons-button data-i18n="104" onclick="location.href='<%= area_index_path %>'"></ons-button></dd>
+                </dl>
+            </div>
+
+        </ons-page>
+    </ons-navigator>
+</div>

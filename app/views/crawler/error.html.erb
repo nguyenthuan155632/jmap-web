@@ -1,0 +1,120 @@
+<div class="container container-page" style="margin-top: 50px">
+	<h2 style="text-align: center;">エラー一覧</h2>
+	<div style="display: inline-flex; float: left;">
+		<div class="text-success success-infor text-center">
+			<% if flash[:success] %>
+			<%= flash[:success] %>
+			<% end %>
+		</div>
+		<div class="text-danger error-infor text-center" style="display: none">Invalid offset/limit input</div>
+	</div>
+	<div style="margin-top: 20px; display: inline-flex; float: right;">
+		<input type="number" class="form-control has-error" style="margin-bottom: 10px; margin-left: 10px;" id="offset" name="offset" placeholder="offset url id" >
+		<input type="number" class="form-control" style="margin-bottom: 10px; margin-left: 10px;" id="limit" name="limit" placeholder="limit url id">
+		<input type="button" class="btn btn-success refresh_btn" value="リフレッシュ" id="refresh_error" style="margin-bottom: 10px; margin-left: 10px;">
+	</div>
+	<div style="clear: both"></div>
+	<table class="table table-bordered table-responsive" id="mapList">
+		<thead class="success">
+			<tr class="info">
+				<th>ID</th>
+				<th>施設ID</th>
+				<th>施設名</th>
+				<th>フロア</th>
+				<th>URL(img)</th>
+				<th>ステータス(img)</th>
+				<th>URL(Web)</th>
+				<th>ステータス(web)</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @urlMasterError.each do |u| %>
+			<tr>
+				<td><%= u.id %></td>
+				<td><%= u.mapId %></td>
+				<td><%= u.venueName %></td>
+				<td><%= u.floor %></td>
+				<% if u.statusCode && u.statusCode != "" %>
+				<% if u.statusCode == "302" || u.statusCode == "301" %>
+				<td><a href="edit/<%= u.id %>">redirected</a></td>
+				<% else %>
+				<td><a href="edit/<%= u.id %>">modify</a></td>
+				<% end %>
+				<% else %>
+				<td></td>
+				<% end %>
+				<td><%= u.statusCode %></td>
+				<% if u.statusCodeWeb && u.statusCodeWeb != "" %>
+				<% if u.statusCodeWeb == "302" || u.statusCodeWeb == "301" %>
+				<td><a href="edit/<%= u.id %>">redirected</a></td>
+				<% else %>
+				<td><a href="edit/<%= u.id %>">modify</a></td>
+				<% end %>
+				<% else %>
+				<td></td>
+				<% end %>
+				<td><%= u.statusCodeWeb %></td>
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
+
+</div>
+
+<script>
+	$(document).ready(function() {
+
+		function checkError(offset, limit) {
+	    	var defer = $.Deferred(); 
+			var data = {
+				offset: offset, 
+				limit: limit,
+				authenticity_token: window._token
+			};
+
+			$.ajax({
+				type:"post",
+				url: "http://" + window.location.hostname + "/checkError",
+				contentType: 'application/x-www-form-urlencoded;json',
+				dataType: "json",
+				data:$.param(data),
+				success: function(data) {
+					defer.resolve(data);
+				},
+				error: function(xhr, textStatus, errorThrown) {
+					defer.reject();
+				}
+			});
+			return defer.promise();
+	    }
+
+    	$('#refresh_error').click(function() {
+			if ($('input[name=offset]').val() != "") {
+				if (parseInt($('input[name=offset]').val()) < 0) {
+					$('.error-infor').css('display', 'block');
+					return false;
+				}
+				else {
+					$('.error-infor').css('display', 'none');
+				}
+			}
+			if ($('input[name=limit]').val() != "") {
+				if (parseInt($('input[name=limit]').val()) < 0) {
+					$('.error-infor').css('display', 'block');
+					return false;
+				}
+				else {
+					$('.error-infor').css('display', 'none');
+				}
+			}
+    		$('#waiting').css('display', 'block');
+    		var offset = $('input[name=offset]').val();
+    		var limit = $('input[name=limit]').val();
+	    	checkError(offset, limit).done(function(response) {
+	    		$('#waiting').css('display', 'none');
+				// location.reload(true);
+			});
+	    });
+
+	});
+</script>

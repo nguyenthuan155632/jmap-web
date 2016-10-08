@@ -1,0 +1,76 @@
+
+<div id="area">
+
+	<%= javascript_include_tag 'area_index.js' %>
+
+    <ons-page>
+        <ons-toolbar>
+          <div class="center navigation-bar__title navigation-bar__center" style="padding-top:10px">
+            <img height="64%" src="img/bar_title_beta.png">
+          </div>
+            <div class="right">
+                <span id="toolbar-button" class="toolbar-button--quiet navigation-bar__line-height">
+                    <i class="ion-navicon" style="font-size:32px; vertical-align:-6px;"></i>
+                </span>
+            </div>
+        </ons-toolbar>
+        
+        <div id="toolbar-menu" class="close" style="background-color:#eee;">
+        	<ul class="list i18ntext" style="margin-top:20px;">
+                <!--<li data-i18n="408" class="list__item list__item&#45;&#45;chevron" onclick="location.href='<%= exp_index_path %>'"></li>-->
+                <li data-i18n="301" class="list__item list__item--chevron" onclick="location.href='<%= info_index_path %>'"></li>
+              <li data-i18n="701" class="list__item list__item--chevron" id="btn-terms"></li>
+            </ul>
+            
+            <p style="margin:16px 0 10px 10px" class="i18ntext" data-i18n="409"></p>
+            <ul class="list">
+              <li class="list__item" onclick="changeDisplayLanguage('zh-CN');">
+                <label class="radio-button radio-button--list-item">
+                  <input type="radio" name="menubtn_lang" value="zh-CN">
+                  <div class="radio-button__checkmark radio-button--list-item__checkmark"></div>
+                  <span data-i18n="105" class="i18ntext"></span>
+                </label>
+              </li>
+              <li class="list__item" onclick="changeDisplayLanguage('zh-TW');">
+                <label class="radio-button radio-button--list-item">
+                  <input type="radio" name="menubtn_lang" value="zh-TW">
+                  <div class="i18ntext radio-button__checkmark radio-button--list-item__checkmark"></div>
+                  <span data-i18n="106" class="i18ntext"></span>
+                </label>
+              </li>
+              <li class="list__item" onclick="changeDisplayLanguage('ja');">
+                <label class="radio-button radio-button--list-item">
+                  <input type="radio" name="menubtn_lang" value="ja">
+                  <div class="i18ntext radio-button__checkmark radio-button--list-item__checkmark"></div>
+                  <span data-i18n="107" class="i18ntext"></span>
+                </label>
+              </li>
+              <li class="list__item" onclick="changeDisplayLanguage('en');">
+                <label class="radio-button radio-button--list-item">
+                  <input type="radio" name="menubtn_lang" value="en" checked>
+                  <div class="i18ntext radio-button__checkmark radio-button--list-item__checkmark"></div>
+                  <span data-i18n="108" class="i18ntext"></span>
+                </label>
+              </li>   
+            </ul>
+        </div>
+    
+        <ons-scroller style="height:100%;">
+            <p class="headding i18ntext" data-i18n="402"></p>
+            
+            <div id="local-area">
+            </div>  
+            <p class="headding i18ntext" data-i18n="403"></p>
+
+            <div class="near-area">
+            	<ul id="near-area">
+                </ul>
+            </div>
+        </ons-scroller>
+    </ons-page>
+     <!-- 検索ボックス -->
+    <div id="search-box">
+    	<input type="search" class="text-input--transparent i18ntext" data-i18n="[placeholder]404" id="search" value="">
+        <ons-button class="search-button" modifier="quiet" id="searchButton"><ons-icon icon="ion-android-search" size="36px"></ons-icon></ons-button>
+    </div>
+</div>

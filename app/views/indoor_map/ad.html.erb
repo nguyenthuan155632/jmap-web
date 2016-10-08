@@ -1,0 +1,46 @@
+<body id="building-select">
+<!-- Google Tag Manager -->
+<%= render :partial => "layouts/noscript" %>
+<%= javascript_include_tag 'gtm.js' %>
+<!-- End Google Tag Manager -->
+
+<%= javascript_include_tag 'indoor_ad.js' %>
+
+<ons-page>
+  <ons-toolbar class="i18ntext">
+    <div class="left">
+      <ons-button onclick="location.href='area'" modifier="quiet">
+        <ons-icon icon="fa-angle-left" size="36px"></ons-icon>
+      </ons-button>
+    </div>
+    <div class="center" style="padding-top:10px">
+      <img height="64%" src="img/bar_title_beta.png">
+    </div>
+    <div class="right" style="display: none;">
+      <ons-button id="recommend_button" modifier="quiet">
+        <ons-icon icon="map-marker" size="36px"></ons-icon>
+      </ons-button>
+    </div>
+  </ons-toolbar>
+
+  <div id="advertisement">
+  <div class="center" style="padding-top:10px">
+    <a href="<%= params[:ad_link] %>">
+      <img id="ad_img" src="<%= params[:ad_img] %>" width="100%" height="100%" alt="ad image" style="display: inline;">
+    </a>
+    </div>
+    <div id="ad_title" style="width: 100%; text-align: center; font-size: 75%; font-style: oblique; padding-top:16px; padding-bottom:16px;">
+      <%= params[:ad_title] %>
+    </div>
+    <div id="ad_overview" style="width: 100%; text-align: center; font-size: 65%;">
+      <%= params[:ad_overview] %>
+    </div>
+    <div class="list__item list__item--chevron" id="enter_map_btn"
+         style="width: 100%; top: 8px; text-align: center;">
+      <%= params[:ad_btn_label] %>
+    </div>
+  </div>
+  </div>
+</ons-page>
+
+</body>

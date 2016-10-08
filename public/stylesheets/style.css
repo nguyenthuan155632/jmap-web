@@ -1,0 +1,655 @@
+@charset "utf-8";
+/* Reset Style */
+html {
+  overflow-y: scroll;
+}
+
+body {
+  line-height: 1;
+  color: #000;
+}
+
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td {
+  margin: 0;
+  padding: 0;
+}
+
+address, caption, cite, code, dfn, em, strong, th, var {
+  font-style: normal;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+caption, th {
+  text-align: left;
+}
+
+q:before, q:after {
+  content: '';
+}
+
+img,
+object,
+embed {
+  vertical-align: top;
+}
+
+hr, legend {
+  display: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-size: 100%;
+}
+
+img, abbr, acronym, fieldset {
+  border: 0;
+}
+
+li {
+  list-style-type: none;
+}
+
+/* YUI 3.4.1 (build 4118) Copyright 2011 Yahoo! Inc. All rights reserved.
+Licensed under the BSD License. http://yuilibrary.com/license/ */
+body {
+  font: 13px/1.231 arial, helvetica, clean, sans-serif;
+  *font-size: small;
+  *font: x-small;
+}
+
+select, input, button, textarea {
+  font: 99% arial,helvetica,clean,sans-serif;
+}
+
+table {
+  font-size: inherit;
+  font: 100%;
+}
+
+pre, code, kbd, samp, tt {
+  font-family: monospace;
+  *font-size: 108%;
+  line-height: 100%;
+}
+
+/* 汎用クラス */
+[class^="mark"] {
+  padding-left: 15px;
+  background: no-repeat left .5em;
+}
+
+.mark1 {
+  background-image: url(../img/share/mark_1.gif);
+}
+
+.mark2 {
+  background-image: url(../img/share/mark_2.gif);
+}
+
+.mark3 {
+  background-image: url(../img/share/mark_3.gif);
+}
+
+.mark4 {
+  background-image: url(../img/share/mark_4.gif);
+}
+
+.mark5 {
+  background-image: url(../img/share/mark_5.gif);
+}
+
+.opacity {
+  opacity: 0.55;
+  -moz-opacity: 0.55;
+  filter: alpha(opacity=55.0);
+  -ms-filter: "alpha(opacity=55.0)";
+}
+
+.inline_block {
+  display: inline-block;
+  *display: inline;
+  *zoom: 1;
+}
+
+.table_cell {
+  display: table-cell;
+  *display: inline;
+  *zoom: 1;
+  vertical-align: middle;
+}
+
+.fr,
+.imgR {
+  float: right;
+  margin-left: 10px;
+}
+
+.fl,
+.imgL {
+  float: left;
+  margin-right: 10px;
+}
+
+.imgC,
+.tC,
+.btn {
+  text-align: center;
+}
+
+.imgC {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.tR,
+.sign {
+  text-align: right;
+}
+
+.box_size {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.ts_none {
+  -webkit-text-shadow: none !important;
+  -moz-text-shadow: none !important;
+  -ms-text-shadow: none !important;
+  -o-text-shadow: none !important;
+  text-shadow: none !important;
+}
+
+.bs_none {
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  -ms-box-shadow: none !important;
+  -o-box-shadow: none !important;
+  box-shadow: none !important;
+}
+
+/* clearfix */
+.clearfix:after, #area .near-area:after, #building-select #building-list #search-box:after, #building-select #building-list ons-scroller ul.list .building-box:after, #building-select .shop-name-box:after, #door-select .building-box:after, #app-exp #nav:after {
+  content: "";
+  clear: both;
+  display: block;
+}
+
+/*----------------------------------------------------
+	element style
+----------------------------------------------------*/
+body {
+  font-family: "メイリオ", "Meiryo", verdana, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, "ＭＳ Ｐゴシック", "MS PGothic", Sans-Serif;
+}
+
+input, textarea {
+  font-family: "メイリオ", "Meiryo", verdana, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, "ＭＳ Ｐゴシック", "MS PGothic", Sans-Serif;
+}
+
+a:link {
+  color: #0066ff;
+}
+a:visited {
+  color: #3399ff;
+}
+a:hover {
+  text-decoration: none;
+  color: blue;
+}
+a:active {
+  color: blue;
+}
+
+/*----------------------------------------------------
+ #common css
+----------------------------------------------------*/
+.headding {
+  font-weight: bold;
+  margin: 16px 0 10px 10px;
+}
+
+/*----------------------------------------------------
+ # トップページ
+----------------------------------------------------*/
+#top .bg {
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+}
+#top .logo-box {
+  padding-top: 10%;
+  text-align: center;
+}
+#top p {
+  margin-top: 10%;
+  text-align: center;
+  font-size: 24px;
+}
+#top dl.start-button {
+  margin-top: 20%;
+  text-align: center;
+}
+#top dl.start-button dd ons-button {
+  width: 60%;
+  margin-bottom: 30px;
+  padding: 10px 0;
+  text-align: center;
+  font-size: 24px;
+}
+
+/*----------------------------------------------------
+ # エリア選択ページ
+----------------------------------------------------*/
+#area #toolbar-menu {
+  position: absolute;
+  width: 100%;
+  top: 0px;
+  z-index: 1;
+  -webkit-box-shadow: 0px 5px 10px 0px rgba(50, 50, 50, 0.75);
+  -moz-box-shadow: 0px 5px 10px 0px rgba(50, 50, 50, 0.75);
+  box-shadow: 0px 5px 10px 0px rgba(50, 50, 50, 0.75);
+}
+#area #toolbar-menu.close {
+  top: -110px;
+}
+#area .local-area {
+  position: relative;
+  margin: 0 10px;
+}
+#area .local-area .title-box {
+  position: absolute;
+  top: 10px;
+  right: 0px;
+  padding: 5px 10px 5px 20px;
+  color: #fff;
+  font-weight: bold;
+  font-size: 28px;
+  border-bottom-left-radius: 24px;
+  -webkit-border-bottom-left-radius: 24px;
+  -moz-border-bottom-left-radius: 24px;
+  -ms-border-bottom-left-radius: 24px;
+  -o-border-bottom-left-radius: 24px;
+  border-top-left-radius: 24px;
+  -webkit-border-top-left-radius: 24px;
+  -moz-border-top-left-radius: 24px;
+  -ms-border-top-left-radius: 24px;
+  -o-border-top-left-radius: 24px;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+#area .local-area .foot-box {
+  position: absolute;
+  width: 100%;
+  bottom: 0px;
+  padding: 5px 0 5px 10px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: rgba(0, 0, 0, 0.7);
+  box-sizing: border-box;
+}
+#area .local-area .foot-box span.name {
+  padding: 10px 6px;
+}
+#area .local-area .foot-box span.num {
+  padding-right: 10px;
+  font-size: 26px;
+}
+#area .near-area {
+  margin: 0 10px 40px 10px;
+}
+#area .near-area ul li {
+  float: left;
+  width: 50%;
+  margin-bottom: 20px;
+}
+#area .near-area ul li .near-area-box {
+  position: relative;
+}
+#area .near-area ul li .near-area-box .title-box {
+  position: absolute;
+  top: 5px;
+  right: 0px;
+  padding: 5px 5px 5px 10px;
+  color: #fff;
+  font-weight: bold;
+  border-bottom-left-radius: 16px;
+  -webkit-border-bottom-left-radius: 16px;
+  -moz-border-bottom-left-radius: 16px;
+  -ms-border-bottom-left-radius: 16px;
+  -o-border-bottom-left-radius: 16px;
+  border-top-left-radius: 16px;
+  -webkit-border-top-left-radius: 16px;
+  -moz-border-top-left-radius: 16px;
+  -ms-border-top-left-radius: 16px;
+  -o-border-top-left-radius: 16px;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+#area .near-area ul li .near-area-box .foot-box {
+  position: absolute;
+  width: 100%;
+  bottom: 0px;
+  padding: 5px 0 5px 10px;
+  color: #fff;
+  font-weight: bold;
+  font-size: 12px;
+  background-color: rgba(0, 0, 0, 0.7);
+  box-sizing: border-box;
+}
+#area .near-area ul li .near-area-box .foot-box span.num {
+  padding: 0 10px;
+  font-size: 21px;
+}
+#area .near-area ul li:nth-child(odd) .near-area-box {
+  margin-right: 10px;
+}
+#area .near-area ul li:nth-child(even) .near-area-box {
+  margin-left: 10px;
+}
+#area #search-box {
+  position: absolute;
+  width: 100%;
+  bottom: 0px;
+  padding: 5px 10px 5px 15px;
+  background-color: #fff;
+  border-top: 1px #ddd solid;
+  z-index: 100;
+  box-sizing: border-box;
+}
+#area #search-box .text-input--transparent {
+  margin-top: 5px;
+  width: 84%;
+  font-size: 18px;
+}
+#area #search-box .search-button {
+  float: right;
+}
+
+/*----------------------------------------------------
+ # 施設選択ページ & ショップ選択ページ
+----------------------------------------------------*/
+#building-select #mapField {
+  width: 100%;
+  height: 100%;
+}
+#building-select #building-list {
+  position: absolute;
+  width: 100%;
+  top: 0px;
+  z-index: 2;
+}
+#building-select #building-list #tab-button {
+  width: 24%;
+  text-align: center;
+  margin: 0 auto;
+  background-color: #fff;
+  border-top-left-radius: 6px;
+  -webkit-border-top-left-radius: 6px;
+  -moz-border-top-left-radius: 6px;
+  -ms-border-top-left-radius: 6px;
+  -o-border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  -webkit-border-top-right-radius: 6px;
+  -moz-border-top-right-radius: 6px;
+  -ms-border-top-right-radius: 6px;
+  -o-border-top-right-radius: 6px;
+}
+#building-select #building-list #search-box {
+  position: absolute;
+  width: 100%;
+  padding: 5px 10px 5px 15px;
+  background-color: #fff;
+  border-bottom: 1px #ddd solid;
+  box-sizing: border-box;
+  -webkit-box-shadow: 0px 5px 8px -5px rgba(50, 50, 50, 0.55);
+  -moz-box-shadow: 0px 5px 8px -5px rgba(50, 50, 50, 0.55);
+  box-shadow: 0px 5px 8px -5px rgba(50, 50, 50, 0.55);
+  z-index: 3;
+}
+#building-select #building-list #search-box .text-input--transparent {
+  margin-top: 5px;
+  width: 84%;
+  font-size: 18px;
+}
+#building-select #building-list #search-box .search-button {
+  float: right;
+}
+#building-select #building-list ons-scroller {
+  margin-top: 54px;
+  height: 410px;
+  background-color: #efefef;
+}
+#building-select #building-list ons-scroller ul.list {
+  background-color: #fff;
+}
+#building-select #building-list ons-scroller ul.list .building-box {
+  padding: 6px 5px;
+}
+#building-select #building-list ons-scroller ul.list .building-box .thumb-box {
+  float: left;
+  width: 25%;
+  margin-right: 10px;
+  box-sizing: border-box;
+}
+#building-select #building-list ons-scroller ul.list .building-box .detail-box {
+  float: left;
+  width: 70%;
+}
+#building-select #building-list ons-scroller ul.list .building-box .detail-box dl dt {
+  font-weight: bold;
+  font-size: 18px;
+  line-height: normal;
+}
+#building-select #building-list ons-scroller ul.list .building-box .detail-box dl dd {
+  font-size: 16px;
+  line-height: normal;
+}
+#building-select #building-list ons-scroller ul.list .building-box .detail-box dl dd.type {
+  margin-bottom: 5px;
+  border-bottom: 1px #ddd solid;
+}
+#building-select .recomend-icon {
+  float: left;
+  margin: 8px 5px 0 0;
+}
+#building-select .shop-name-box {
+  padding: 10px;
+}
+#building-select .shop-name-box p.name {
+  margin-top: 5px;
+  font-size: 18px;
+  font-weight: bold;
+}
+#building-select .shop-name-box .left {
+  float: left;
+}
+#building-select .shop-name-box .right {
+  float: right;
+}
+#building-select .build-name-box {
+  padding: 10px;
+}
+#building-select .build-name-box p.name {
+  margin-top: 5px;
+  font-size: 18px;
+  font-weight: bold;
+}
+#building-select .shop-detail-box p.detail-text {
+  margin-bottom: 10px;
+  padding: 10px;
+  border-bottom: 1px #ddd solid;
+}
+#building-select .shop-detail-box .button-box {
+  text-align: center;
+}
+#building-select .shop-detail-box .button-box ons-button {
+  width: 70%;
+  margin-bottom: 20px;
+}
+
+/*----------------------------------------------------
+ # 入口選択ページ
+----------------------------------------------------*/
+#door-select .building-box {
+  padding: 10px 5px 10px 10px;
+  border-bottom: 1px #ddd solid;
+}
+#door-select .building-box .thumb-box {
+  float: left;
+  width: 25%;
+  margin-right: 10px;
+  box-sizing: border-box;
+}
+#door-select .building-box .detail-box {
+  float: left;
+  width: 70%;
+}
+#door-select .building-box .detail-box dl dt {
+  font-weight: bold;
+  font-size: 18px;
+  line-height: normal;
+}
+#door-select .building-box .detail-box dl dd {
+  font-size: 16px;
+  line-height: normal;
+}
+#door-select .building-box .detail-box dl dd.type {
+  margin-bottom: 7px;
+  padding-bottom: 4px;
+  border-bottom: 1px #ddd solid;
+}
+#door-select #mapField {
+  background-color: #fff;
+  height: 54%;
+}
+#door-select #door-select-box {
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  padding: 15px 10px;
+  border-top: 1px #ddd solid;
+  background-color: #efefef;
+  z-index: 99;
+  box-sizing: border-box;
+}
+#door-select #door-select-box img {
+  margin-top: 5px;
+  opacity: 0.65;
+}
+#door-select #door-select-box img.selected {
+  margin-top: 0px;
+  border: 5px #fa4 solid;
+  opacity: 1;
+}
+
+/*----------------------------------------------------
+ # アプリ情報ページ
+----------------------------------------------------*/
+#app-info .logo-box {
+  width: 100%;
+  padding: 14% 0;
+  background-color: #fff;
+  text-align: center;
+  -webkit-box-shadow: 0px 3px 6px 0px rgba(50, 50, 50, 0.55);
+  -moz-box-shadow: 0px 3px 6px 0px rgba(50, 50, 50, 0.55);
+  box-shadow: 0px 3px 6px 0px rgba(50, 50, 50, 0.55);
+}
+#app-info .info-box {
+  padding: 30px 20px 0 20px;
+}
+#app-info .info-box dl dt {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+#app-info .info-box dl dd {
+  margin: 0 0 20px 16px;
+}
+
+/*----------------------------------------------------
+ # アプリの説明ページ
+----------------------------------------------------*/
+#app-exp #nav {
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  padding: 10px;
+  background-color: #fff;
+  border-top: 1px #ddd solid;
+  box-sizing: border-box;
+}
+#app-exp #nav .left {
+  float: left;
+}
+#app-exp #nav .right {
+  float: right;
+}
+#app-exp .exp-img {
+  padding: 16px 0;
+  background-color: #fff;
+  text-align: center;
+}
+#app-exp .exp-title {
+  padding: 10px 20px 0 15px;
+  font-weight: bold;
+}
+#app-exp .exp-text {
+  padding: 10px 20px;
+  line-height: 160%;
+}
+#app-exp .logo-box {
+  width: 100%;
+  text-align: center;
+  padding: 15% 0 20% 0;
+}
+#app-exp .logo-box p {
+  margin-top: 10%;
+  text-align: center;
+  font-size: 24px;
+}
+#app-exp .start-button {
+  text-align: center;
+}
+#app-exp .start-button ons-button {
+  width: 60%;
+  margin-bottom: 30px;
+  padding: 10px 0;
+  text-align: center;
+  font-size: 24px;
+}
+
+#singleButtonDialog p {
+  padding: 10px;
+}
+#singleButtonDialog .ok-button-box {
+  text-align: center;
+  padding: 10px 0 20px 0;
+}
+#singleButtonDialog .ok-button-box ons-button {
+  width: 60%;
+}
+
+.navigation-bar__title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.popover,
+.popover__content {
+  min-height: 60px;
+}
+
+/*----------------------------------------------------
+	印刷用スタイル
+----------------------------------------------------*/
+@media print {
+  * html body {
+    zoom: .7;
+  }
+}

@@ -1,0 +1,35 @@
+<body id="app-info">
+<!-- Google Tag Manager -->
+<%= render :partial => "layouts/noscript" %>
+<%= javascript_include_tag 'gtm.js' %>
+<!-- End Google Tag Manager -->
+
+<%= javascript_include_tag 'info_index.js' %>
+
+	<div>	
+	    <ons-page>
+	        <ons-toolbar>
+	            <div class="left"><ons-button onclick="location.href='area'" modifier="quiet"><ons-icon icon="fa-angle-left" size="36px"></ons-icon></ons-button></div>
+	            <div class="center i18ntext" data-i18n="301"></div>
+	        </ons-toolbar>
+	      	
+	        <div class="logo-box">
+	        	<img src="img/app-logo.png" width="64%" alt="Japan Indoor Map" />
+	        	<!-- img src="img/app-logo-cha.svg" width="80%" alt="JMAP-CHA" / -->
+              <div>Copyright © 2016 Japan Systems Co.,Ltd. <br />All rights reserved.</div>
+	        </div>
+	        
+	        <div class="info-box i18ntext">
+	        	<dl>
+	            	<dt data-i18n="302"></dt>
+	                <dd data-i18n="303"></dd>
+                    <dd><a href="http://japan-indoormap.com/" id="info-indv" class="i18ntext" data-i18n="308">問い合せ：法人のお客様</a></dd>
+	                <dd><a href="info/contact" id="info-indv" class="i18ntext" data-i18n="309">問い合せ：個人のお客様</a></dd>
+	                <dt data-i18n="306"></dt>
+                  <dd><a href="#" id="web-site" class="i18ntext" data-i18n="307"></a></dd>
+	            </dl>
+	        </div>
+	    </ons-page>
+	</div>
+</body>
+

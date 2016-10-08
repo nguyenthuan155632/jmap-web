@@ -1,0 +1,134 @@
+<div class="container container-page" style="margin-top: 50px">
+	<h2 class="text-center">屋内マップ差分抽出</h2>
+	<div style="display: inline-flex; float: left;">
+		<div class="text-danger error-infor text-center" style="display: none">Invalid offset/limit input</div>
+	</div>
+	<div style="margin-top: 20px; display: inline-flex; float: right;">
+		<input type="number" class="form-control" style="margin-bottom: 10px; margin-left: 10px;" id="offset" name="offset" placeholder="offset url id" >
+		<input type="number" class="form-control" style="margin-bottom: 10px; margin-left: 10px;" id="limit" name="limit" placeholder="limit url id">
+		<input type="button" class="btn btn-success refresh_btn" value="リフレッシュ" id="refresh_difference" style="margin-bottom: 10px; margin-left: 10px;">
+	</div>
+	<div style="clear: both"></div>
+	<div class="text-danger messages" style="margin-bottom: 20px">
+		<% if flash[:messages] %>
+		<% flash[:messages].each do |m| %>
+		<% if m == "Refresh successfully!" %>
+		<span style="color: #3c763d;"><%= m %></span>
+		<% else %>
+		<%= m %>
+		<% end %>
+		<br/>
+		<% end %>
+		<% end %>
+	</div>
+	<table class="table table-bordered table-responsive" id="mapList">
+		<thead class="success">
+			<tr class="info">
+				<th class="text-center">ID</th>
+				<th class="text-center width-diference-50">施設ID</th>
+				<th class="text-center width-diference-140">施設名</th>
+				<th class="width-diference-50">フロア</th>
+				<th class="text-center width-diference-35">履歴</th>
+				<th class="text-center width-diference-35">世代</th>
+				<th class="text-center width-diference-35">TYPE</th>
+				<th class="text-center">old</th>
+				<th class="text-center">new</th>
+				<th class="text-center">diff</th>
+				<th class="text-center">size</th>
+				<th class="text-center">archive</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% i = 0 %>
+			<% @history.each do |h| %>
+			<tr>
+				<% i = i + 1 %>
+				<td class="text-center"><%= i %></td>
+				<td class="text-center"><%= h.mapId %></td>
+				<td class="text-center"><%= h.venueName %></td>
+				<td style=""><%= h.floor %></td>
+				<td class="text-center"><%= h.countHistory %></td>
+				<td class="text-center"><%= h.generation %></td>
+				<td class="text-center"><%= h.typeUrl %></td>
+				<td class="text-center"><a target="_blank" href="/crawler/<%= h.oldImage %>"><%= h.oldLinkImage %></a></td>
+				<td class="text-center"><a target="_blank" href="/crawler/<%= h.newImage %>"><%= h.newLinkImage %></td>
+				<td class="text-center"><a target="_blank" href="/crawler/<%= h.diffImage %>"><%= h.newLinkImage %>.diff</td>
+				<td class="text-center"><%= h.size.to_i / 1024 %></td>
+				<td class="text-center"><input type="button" data-id="<%= h.id %>" value="archive" class="btn btn-primary archive_btn" /></td>
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
+</div>
+
+<script>
+	$(document).ready(function() {
+		function showDifference(offset, limit) {
+	    	var defer = $.Deferred(); 
+			var data = {
+				offset: offset, 
+				limit: limit,
+				authenticity_token: window._token
+			};
+
+			$.ajax({
+				type:"post",
+				url: "http://" + window.location.hostname + "/showDifference",
+				contentType: 'application/x-www-form-urlencoded;json',
+				dataType: "json",
+				data:$.param(data),
+				success: function(data) {
+					defer.resolve(data);
+				},
+				error: function(xhr, textStatus, errorThrown) {
+					defer.reject();
+				}
+			});
+			return defer.promise();
+	    }
+
+    	$('#refresh_difference').click(function() {
+			$('.messages').css('display', 'none');
+			if ($('input[name=offset]').val() != "") {
+				if (parseInt($('input[name=offset]').val()) < 0) {
+					$('.error-infor').css('display', 'block');
+					return false;
+				}
+				else {
+					$('.error-infor').css('display', 'none');
+				}
+			}
+			if ($('input[name=limit]').val() != "") {
+				if (parseInt($('input[name=limit]').val()) < 0) {
+					$('.error-infor').css('display', 'block');
+					return false;
+				}
+				else {
+					$('.error-infor').css('display', 'none');
+				}
+			}
+    		$('#waiting').css('display', 'block');
+    		var offset = $('input[name=offset]').val();
+    		var limit = $('input[name=limit]').val();
+	    	showDifference(offset, limit).done(function(response) {
+				$('#waiting').css('display', 'none');
+				location.reload(true);
+			});
+	    });
+
+	});
+</script>
+<style type="text/css">
+	.width-diference-50 {
+		width: 50px !important;
+	}
+	.width-diference-35 {
+		width: 35px !important;
+	}
+	.width-diference-140 {
+		width: 140px !important;
+	}
+	.width-diference-40 {
+		width: 40px !important;
+	}
+</style>

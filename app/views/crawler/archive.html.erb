@@ -1,0 +1,47 @@
+<div class="container container-page" style="margin-top: 50px"> 
+	<h1 class="text-center">Archive</h1>
+	<div style="margin-top: 20px;">
+		<%= link_to "Export CSV", export_archive_path, :class=>"btn btn-default add-url" %>
+	</div>
+	<div>
+		<input type="radio" name="isArchive" value="true" <%= "checked" if @archive == "true" %> /> Archive &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<input type="radio" name="isArchive" value="false" <%= "checked" if @archive == "false" %> /> Not Archive
+	</div>
+	<div style="clear: both"></div>
+	<div class="table-responsive" style="margin-top: 20px">
+		<table class="table" id="mapList">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>mapId</th>
+					<th>venueName</th>
+					<th>floor</th>
+					<% if @archive == "true" %>
+					<th>time</th>
+					<th>restore</th>
+					<% end %>
+				</tr>
+			</thead>
+			<tbody>
+				<% i = 0 %>
+				<% @urlMasters.each do |u| %>
+				<tr>
+					<% i = i + 1 %>
+					<td><%= i %></td>
+					<td><%= u.mapId %></td>
+					<td><%= u.venueName %></td>
+					<td><%= u.floor %></td>
+					<% if @archive == "true" %>
+					<td><%= u.archiveTime.in_time_zone("Asia/Tokyo").strftime("%Y-%m-%d %H:%M:%S") %></td>
+					<td><input type="button" class="btn btn-primary restore_btn" data-id="<%= u.id %>" value="restore" /></td>
+					<% end %>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+
+	<!-- <a href="" class="btn btn-success">エラーチェック実行</a>
+	<a href="" class="btn btn-info">屋内マップ差分抽出</a> -->
+</div>
+

@@ -1,0 +1,5 @@
+#!/bin/sh
+
+cp -pr public.orig/. public/ &&
+  bundle exec rake assets:precompile &&
+  unicorn -c config/unicorn.rb

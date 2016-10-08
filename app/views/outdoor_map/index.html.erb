@@ -1,0 +1,273 @@
+<body id="building-select">
+<!-- Google Tag Manager -->
+<%= render :partial => "layouts/noscript" %>
+<%= javascript_include_tag 'gtm.js' %>
+<!-- End Google Tag Manager -->
+
+<%= javascript_include_tag 'outdoor_index.js' %>
+
+<ons-page>
+  <ons-toolbar class="i18ntext">
+    <div class="left">
+      <ons-button onclick="location.href='area'" modifier="quiet">
+        <ons-icon icon="fa-angle-left" size="36px"></ons-icon>
+      </ons-button>
+    </div>
+    <div class="center" style="padding-top:10px">
+      <img height="64%" src="img/bar_title_beta.png">
+    </div>
+    <div class="right">
+      <ons-button id="recommend_button" modifier="quiet">
+        <ons-icon icon="map-marker" size="36px"></ons-icon>
+      </ons-button>
+    </div>
+  </ons-toolbar>
+
+  <div id="mapField">
+  </div>
+</ons-page>
+
+<div id="building-list">
+  <div id="tab-button">
+    <ons-button modifier="quiet" id="search_icon_button">
+      <ons-icon icon="ion-chevron-up" size="36px" id="listicon"></ons-icon>
+    </ons-button>
+  </div>
+
+  <!-- 検索ボックス -->
+  <div id="search-box">
+    <input type="text" class="text-input--transparent i18ntext" data-i18n="[placeholder]404" value="" id="search">
+    <ons-button class="search-button" modifier="quiet" id="searchButton">
+      <ons-icon icon="ion-android-search" size="36px"></ons-icon>
+    </ons-button>
+  </div>
+
+  <ons-scroller id="searchFreeWord">
+    <ul class="list" id="searchlist">
+    </ul>
+  </ons-scroller>
+</div>
+
+<!-- recomend dialog -->
+<ons-template id="recomend-dialog.html">
+  <ons-dialog var="recomendDialog" cancelable>
+    <ons-toolbar inline>
+      <div class="center i18ntext" data-i18n="502"></div>
+      <div class="right">
+        <ons-button onclick="recomendDialog.hide()" modifier="quiet">
+          <ons-icon icon="ion-close-round" size="24px"></ons-icon>
+        </ons-button>
+      </div>
+    </ons-toolbar>
+
+    <ul class="list list--noborder">
+      <li class="list__item" style="clear:both;">
+        <div class="recomend-icon">
+          <object data="img/icon-taxfree.svg" type="image/svg+xml" width="23" height="26"></object>
+        </div>
+        <span class="list__item__line-height i18ntext" data-i18n="406"></span>
+        <label class="switch switch--list-item">
+          <input type="checkbox" class="switch__input" id="recommend_duty_free">
+
+          <div class="switch__toggle"></div>
+        </label>
+      </li>
+      <li class="list__item" style="clear:both;">
+        <div class="recomend-icon">
+          <object data="img/icon-concierge.svg" type="image/svg+xml" width="23" height="26"></object>
+        </div>
+        <span class="list__item__line-height i18ntext" data-i18n="407"></span>
+        <label class="switch switch--list-item">
+          <input type="checkbox" class="switch__input" id="recommend_concierge">
+
+          <div class="switch__toggle"></div>
+        </label>
+      </li>
+    </ul>
+
+  </ons-dialog>
+</ons-template>
+<!-- /recomend dialog -->
+
+<!-- root search dialog -->
+<ons-template id="root-search-dialog.html">
+  <ons-dialog var="rootSearchDialog" cancelable>
+    <ons-toolbar inline>
+      <div class="center i18ntext" data-i18n="806"></div>
+      <div class="right">
+        <ons-button onclick="rootSearchDialog.hide()" modifier="quiet">
+          <ons-icon icon="ion-close-round" size="24px"></ons-icon>
+        </ons-button>
+      </div>
+    </ons-toolbar>
+    <ons-scroller style="height:inherit;">
+      <!-- 不要のため暫定的に非表示 -->
+      <div style="background-color:#eee; padding:5px; display: none;"><span class="i18ntext" data-i18n="800"></span>
+      </div>
+      <ul class="list" style="display: none;">
+        <li class="list__item" style="clear:both;">
+          <div class="recomend-icon"><img src="img/icon_shopping.png" width="26" height="26"></div>
+          <span class="list__item__line-height i18ntext" data-i18n="803"></span>
+          <label class="checkbox list__right-label">
+            <input type="checkbox" name="buildtype" value="department" checked>
+
+            <div class="checkbox__checkmark"></div>
+          </label>
+        </li>
+        <li class="list__item" style="clear:both;">
+          <div class="recomend-icon"><img src="img/icon_electronics.png" width="26" height="26"></div>
+          <span class="list__item__line-height i18ntext" data-i18n="804"></span>
+          <label class="checkbox list__right-label">
+            <input type="checkbox" name="buildtype" value="appliance-store" checked>
+
+            <div class="checkbox__checkmark"></div>
+          </label>
+        </li>
+        <li class="list__item" style="clear:both;">
+          <div class="recomend-icon"><img src="img/icon_underground.png" width="26" height="26"></div>
+          <span class="list__item__line-height i18ntext" data-i18n="805"></span>
+          <label class="checkbox list__right-label">
+            <input type="checkbox" name="buildtype" value="shopping-street" checked>
+
+            <div class="checkbox__checkmark"></div>
+          </label>
+        </li>
+      </ul>
+      <div id="list-root-search"></div>
+      <div style="background-color:#eee; padding:5px;"><span class="i18ntext" data-i18n="802"></span></div>
+      <ul class="list">
+        <li class="list__item list__item--chevron" id="recommend_ch">
+          <div class="recomend-icon">
+            <object data="img/icon-concierge.svg" type="image/svg+xml" width="23" height="26"></object>
+          </div>
+          <span class="list__item__line-height i18ntext" data-i18n="407"></span>
+        </li>
+        <li class="list__item list__item--chevron" id="recommend_taxfree">
+          <div class="recomend-icon">
+            <object data="img/icon-taxfree.svg" type="image/svg+xml" width="23" height="26"></object>
+          </div>
+          <span class="list__item__line-height i18ntext" data-i18n="406"></span>
+        </li>
+      </ul>
+    </ons-scroller>
+  </ons-dialog>
+</ons-template>
+<!-- /root search dialog -->
+
+<!-- onsite search dialog -->
+<ons-template id="onsite-search-dialog.html">
+  <ons-dialog var="onsiteSearchDialog" cancelable>
+    <ons-toolbar inline>
+      <div class="center" id="buildname-search"></div>
+      <div class="right">
+        <ons-button onclick="onsiteSearchDialog.hide()" modifier="quiet">
+          <ons-icon icon="ion-close-round" size="24px"></ons-icon>
+        </ons-button>
+      </div>
+    </ons-toolbar>
+    <ons-scroller style="height:inherit;">
+      <div id="list-onsite-search"></div>
+      <div style="background-color:#eee; padding:5px;"><span class="i18ntext" data-i18n="802"></span></div>
+      <ul class="list">
+        <li class="list__item list__item--chevron" id="recommend_ch">
+          <div class="recomend-icon">
+            <object data="img/icon-concierge.svg" type="image/svg+xml" width="23" height="26"></object>
+          </div>
+          <span class="list__item__line-height i18ntext" data-i18n="407"></span>
+        </li>
+        <li class="list__item list__item--chevron" id="recommend_taxfree">
+          <div class="recomend-icon">
+            <object data="img/icon-taxfree.svg" type="image/svg+xml" width="23" height="26"></object>
+          </div>
+          <span class="list__item__line-height i18ntext" data-i18n="406"></span>
+        </li>
+      </ul>
+    </ons-scroller>
+  </ons-dialog>
+</ons-template>
+<!-- /onsite search dialog -->
+
+<!-- multi toilet dialog -->
+<ons-template id="multi-toilet-dialog.html">
+  <ons-dialog var="multiToiletDialog" cancelable>
+    <ons-toolbar inline>
+      <div class="center" id="buildname-multi"></div>
+      <div class="right">
+        <ons-button onclick="multiToiletDialog.hide()" modifier="quiet">
+          <ons-icon icon="ion-close-round" size="24px"></ons-icon>
+        </ons-button>
+      </div>
+    </ons-toolbar>
+    <ons-scroller style="height:inherit;">
+      <ul class="list" id="shoplist">
+      </ul>
+    </ons-scroller>
+  </ons-dialog>
+</ons-template>
+<!-- /onsite search dialog -->
+
+<!-- build select dialog -->
+<ons-template id="build-select-dialog.html">
+  <ons-popover direction="up down" cancelable style="width:90%;">
+    <div id="buildSelectDialog">
+      <div class="build-name-box">
+        <!-- 施設名 -->
+        <p class="left name" id="buildname"></p>
+
+        <p style="font-size:12px" id="buildaddr"></p>
+
+        <p style="font-size:12px" id="buildtext"></p>
+      </div>
+      <ul class="list">
+        <li class="list__item list__item--chevron" id="buildbtn">
+          <span class="i18ntext" data-i18n="807"></span>
+        </li>
+        <li class="list__item list__item--chevron" id="searchbtn">
+          <span class="i18ntext" data-i18n="806"></span>
+        </li>
+        <li class="list__item list__item--chevron" id="buildurl">
+          <span class="i18ntext" data-i18n="808"></span>
+        </li>
+      </ul>
+    </div>
+  </ons-popover>
+</ons-template>
+<!-- /build select dialog -->
+
+<!-- single build select dialog -->
+<ons-template id="single-build-select-dialog.html">
+  <ons-popover direction="up down" cancelable style="width:90%;">
+    <div id="singleBuildSelectDialog">
+      <div class="build-name-box" id="buildbtn_s">
+        <ons-button style="float:right;" modifier="quiet">
+          <ons-icon icon="ion-ios-arrow-forward" size="36px"></ons-icon>
+        </ons-button>
+        <!-- 施設名 -->
+        <p class="left name" id="buildname_s"></p>
+
+        <p style="font-size:12px" id="buildaddr_s"></p>
+
+        <p style="font-size:12px" id="buildtext_s"></p>
+      </div>
+    </div>
+  </ons-popover>
+</ons-template>
+<!-- /build select dialog -->
+
+<!-- build limit indoor dialog -->
+<ons-template id="build-limit-indoor-dialog.html">
+  <ons-popover direction="up down" cancelable style="width:90%;">
+    <div id="buildLimitIndoorDialog">
+      <div class="build-name-box">
+        <!-- 施設名 -->
+        <p class="left name" id="buildname_l"></p>
+
+        <p style="font-size:12px" id="buildaddr_l"></p><br>
+
+        <p style="font-size:14px; text-align: center" class="i18ntext" id="buildtext_l" data-i18n="809"></p><br>
+      </div>
+    </div>
+  </ons-popover>
+</ons-template>
+<!-- /build select dialog -->
+</body>

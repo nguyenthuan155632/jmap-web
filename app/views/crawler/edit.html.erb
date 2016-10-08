@@ -1,0 +1,39 @@
+<div class="container container-page" style="margin-top: 50px;">
+	<h2 style="text-align: center;">Edit</h2>
+	<form method="post" action="/edit/<%= @Urlmaster.id %>">
+		<div class="form-group">
+			<label for="mapId">mapId</label>
+			<input type="text" class="form-control" id="mapId" name="mapId" value="<%= @Urlmaster.mapId %>">
+		</div>
+		<div class="form-group">
+			<label for="venueName">venueName</label>
+			<input type="text" class="form-control" id="venueName" name="venueName" value="<%= @Urlmaster.venueName %>">
+		</div>
+		<div class="form-group">
+			<label for="floor">floor</label>
+			<input type="text" class="form-control" id="floor" name="floor" value="<%= @Urlmaster.floor %>">
+		</div>
+		<div class="form-group">
+			<label for="typeMap">typeMap</label>
+			<input type="text" class="form-control" id="typeMap" name="typeMap" value="<%= @Urlmaster.typeMap %>">
+		</div>
+		<div class="form-group">
+			<label for="venueFloorMapImageUrl">venueFloorMapImageUrl</label>
+			<input type="text" class="form-control" id="venueFloorMapImageUrl" name="venueFloorMapImageUrl" value="<%= @Urlmaster.venueFloorMapImageUrl %>">
+		</div>
+		<div class="form-group">
+			<label for="venueFloorMapUrl">venueFloorMapUrl</label>
+			<input type="text" class="form-control" id="venueFloorMapUrl" name="venueFloorMapUrl" value="<%= @Urlmaster.venueFloorMapUrl %>">
+		</div>
+		<div class="form-group">
+			<label for="statusCode">statusCode</label>
+			<input type="text" class="form-control" id="statusCode" name="statusCode" value="<%= @Urlmaster.statusCode %>">
+		</div>
+		<div class="form-group">
+			<label for="statusCodeWeb">statusCodeWeb</label>
+			<input type="text" class="form-control" id="statusCodeWeb" name="statusCodeWeb" value="<%= @Urlmaster.statusCodeWeb %>">
+		</div>
+		<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+		<button type="submit" class="btn btn-primary">Update</button>
+	</form>
+</div>

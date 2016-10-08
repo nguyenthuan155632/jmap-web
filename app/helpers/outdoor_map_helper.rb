@@ -1,0 +1,2 @@
+module OutdoorMapHelper
+end
